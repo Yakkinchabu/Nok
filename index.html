@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>นกเอี้ยงถือปืน</title>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: white;
+            color: #388e3c;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header img {
+            height: 60px;
+            vertical-align: middle;
+            transition: filter 0.3s;
+        }
+        header img:hover {
+            filter: brightness(0) saturate(100%) invert(56%) sepia(91%) saturate(646%) hue-rotate(75deg) brightness(91%) contrast(92%);
+        }
+        header h1 {
+            margin: 10px 0 0;
+            font-size: 2.5em;
+        }
+        nav {
+            background-color: #4caf50;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .intro h1 {
+            color: #388e3c;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .intro p {
+            font-size: 1.2em;
+        }
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .step {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .step h2 {
+            color: #388e3c;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .step p {
+            font-size: 1.1em;
+        }
+        .video-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .cta a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .cta a:hover {
+            background-color: #388e3c;
+        }
+        .team {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .team h2 {
+            color: #388e3c;
+            font-size: 1.8em;
+        }
+        .team p {
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+        footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #ffee58;
+            text-decoration: none;
+        }
+        .chat-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-header {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .chat-body {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+        .chat-input button {
+            padding: 10px;
+            border: none;
+            background-color: #388e3c;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background-color: #2e7d32;
+        }
+        .survey-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .survey-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .survey-box h3 {
+            margin-bottom: 15px;
+        }
+        .survey-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .survey-box button {
+            padding: 10px 20px;
+            background-color: #388e3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .survey-box button:hover {
+            background-color: #2e7d32;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            margin: 40px 0;
+            text-align: center;
+            background: #f9f9f9;
+            padding: 30px;
+        }
+        .testimonials h2 {
+            color: #388e3c;
+            margin-bottom: 20px;
+        }
+        .testimonial {
+            margin: 10px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .testimonial p {
+            font-style: italic;
+        }
+
+        /* FAQ Section */
+        .faq {
+            margin: 40px 0;
+            padding: 20px;
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .faq h2 {
+            color: #388e3c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            margin: 10px 0;
+        }
+        .faq-item h3 {
+            color: #4caf50;
+            margin: 0;
+        }
+        .faq-item p {
+            margin: 5px 0 0;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .progress-bar span {
+            display: block;
+            background: #4caf50;
+            height: 20px;
+            width: 70%;
+            margin: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.imgflip.com/4y2dit.png?a482208" alt="โลโก้">
+        <h1>นกเอี้ยงถือปืน</h1>
+        <p>นกเอี้ยงถือปืนที่จะทำให้คุณเรียนรู้ภาษาอังกฤษได้ดียิ่งขึ่้น</p>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About us</a>
+        <a href="#cta">Get start</a>
+        <a href="#video">Video</a>
+    </nav>
+    <div class="container">
+        <div id="home" class="intro">
+            <h1>นกเอี้ยงถือปืน คืออะไร?</h1>
+            <p>หากพูดถึงแอปพลิเคชันและแพล็ตฟอร์มฝึกภาษาที่ได้รับความนิยมมากที่สุดในยุคปัจจุบันทั้งในหมู่นักเรียน คุณครู ผู้ปกครอง จนถึงบุคคลทั่วไปหนึ่งในแพล็ตฟอร์มที่คงไม่พูดถึงเลยไม่ได้ก็คือ Duolingo หรือแอปพลิเคชัน แพล็ตฟอร์มฝึกภาษาในรูปแบบการแข่งขันหรือเกม (Gamification) นั่นเอง
+
+                แม้ภายนอกอาจดูเหมือนเป็นเทคโนโลยีการศึกษาทั่วๆไปหน้าตาน่ารักสดใสแต่ด้วยการผนวกเอา Gamification และเทคนิคการเรียนรู้ที่มีประสิทธิภาพมาใช้ร่วมกัน Duolingo จึงกลายเป็นอีกหนึ่งเทคโนโลยีการศึกษาที่ตอบโจทย์ผู้เรียนอย่างยิ่ง โดยเฉพาะเด็กๆและใครก็ตามที่รู้สึกท้อหรือเบื่อกับการเรียนรู้ภาษาเชิงท่องจำแบบเดิมๆแต่เจ้าเทคโนโลยีการศึกษาสุดมหัศจรรย์นี้มีหน้าตาอย่างไร มีฟังก์ชันการใช้งาน และมีประโยชน์อย่างไร วันนี้ Starfish Labz จะพาผู้อ่านทุกคนมาทำความรู้จักกับ Duolingo กันครับ</p>
+                <img src="https://www.starfishlabz.com/media/518489" alt="ภาพ1" width="600" height="auto">
+                <p>อย่างที่เกริ่นกันไปข้างต้น Duolingo คือแพล็ตฟอร์มการฝึกภาษาที่สาม ทั้งในรูปของแอปพลิเคชันและเว็บไซต์ที่ผนวกเอาเทคนิคการเรียนรู้ในรูปแบบเกม (Gamification) และหลักสูตรเทคนิคการเรียนรู้ที่มีคุณภาพเข้ามาไว้ด้วยกันนั่นเอง ลักษณะการเรียนรู้หลักๆใน Duolingo จึงคล้ายกับการเล่นเกมเรียนรู้ผ่านการตอบคำถาม สะสมคะแนนเลื่อนขั้นแต่ในขณะเดียวกัน ก็เป็นเกมการเรียนรู้ที่ได้รับการออกแบบและพัฒนามาแล้วโดยเฉพาะ แม้ภายนอกอาจดูเหมือนเป็นเกมทั่วๆไป แต่ละคอร์สมีเทคนิคการเรียนรู้มีกลไกและหลักสูตร และมาตรฐานต่างๆ เช่น Common European Framework of Reference for Languages (CEFR) หรือมาตรฐานสากลในการอธิบายความสามารถทางภาษาในด้าน การอ่าน การเขียน การฟัง และการพูดอยู่เบื้องหลัง นอกเหนือจากหลักสูตรมาตรฐานและเทคนิคต่างๆที่ถูกผสมผสานอยู่ภายในแพล็ตฟอร์มแล้ว ตัวเทคโนโลยียังมีการใช้ AI เข้ามาคอยดูแลผู้เรียนประเมินผลการเรียนและนำเสนอคอร์ส รวมถึงรายละเอียดต่างๆที่ตรงตาม Profile ความต้องการและระดับทักษะของผู้เรียนโดยเฉพาะ</p>
+               <h2>ฟีเจอร์เด่นใน Duolingo</h2>
+                <img src="https://www.starfishlabz.com/media/518490" alt="ภาพ1" width="600" height="auto">
+                <p>1.   UX / UI ที่สดใส สบายตา สนุก และง่ายต่อการใช้งาน
+                    หน้าตาและประสบการณ์ใช้งาน (UX/UI) ของแพล็ตฟอร์มถือเป็นหนึ่งในองค์ประกอบสำคัญที่ขาดไม่ได้ของเทคโนโลยีการศึกษาและ Duolingo ก็ไม่เพียงแค่สอบผ่านในจุดนี้แต่ยังกลายเป็นหนึ่งใน EdTech Platforms แรกๆเลยทีเดียวที่ออกแบบ UX/UI ของตัวเองได้อย่างตอบโจทย์ผู้ใช้งานสุด ๆโดยเฉพาะผู้ใช้งานวัยเด็ก หรือรวมถึงผู้ใหญ่เองก็รู้สึกเลยว่าเมื่อลองกดเข้าไปแล้ว การเรียนรู้ภาษาใหม่ๆ ไม่ใช่เรื่องที่น่ากลัวหรือน่าเบื่อเสมอไปแถมเรียนๆไปยังกลายเป็นเหมือนเล่นเกมแทบไม่รู้สึกเลยว่าแต่ละบทเรียนคือคอร์สเรียนอย่างจริงจัง</p>   
+                     <p>2.  มีการสอบวัดระดับก่อนการใช้งาน
+                    การฝึกษาภาษาอย่างมีประสิทธิภาพจะเป็นไปไม่ได้เลยหากผู้เรียนและผู้สอนไม่รู้จักใบหน้า Profile หรือระดับของผู้เรียนก่อน อีกหนึ่งฟีเจอร์ที่สำคัญของ Duolingo ก่อนเริ่มเรียนจึงคือการสอบวัดระดับก่อนเริ่มใช้งาน ซึ่งจะช่วยให้ AI ของเทคโนโลยีนำเสนอคอร์สที่ตรงกับระดับของผู้เรียนได้ รวมถึงผู้เรียนเองก็ยังรู้ระดับของตัวเอง และเจ้าตัวระดับหรือเลเวลนี้ยังเป็นองค์ประกอบสำคัญ เพราะเมื่อพัฒนาขึ้นเรื่อยๆแล้ว ระบบก็จะแสดงให้เห็นเลยว่าระดับทักษะของเราเริ่มเพิ่มขึ้นเรื่อยๆแล้วนะ อย่าเพิ่งท้อไปเสียก่อน</p>
+                    
+                    <p>3.  ฟีเจอร์ Gamification สุดสนุกมากมาย
+                    
+                    ใครว่าการเรียนภาษาต้องเป็นเรื่องน่าเบื่อ ภายใน Duolingo อีกหนึ่งกลุ่มฟีเจอร์ที่สำคัญแน่นอนว่าก็คือเหล่าองค์ประกอบ Gamifications เช่น Leaderboards และ Leagues ใครฝึกกันถึงไหน อยู่ที่ระดับใด ใครเริ่มชำนาญแล้ว ใครอยู่ที่จุดใดกันแล้วบ้าง Duolingo มีการจัดแสดง Experience Points (XP) คะแนนประสบการณ์หรือคะแนนการฝึก ยิ่งฝึกอย่างเป็นประจำ คะแนนก็ยิ่งสูง Progress Bars แถบแสดงความก้าวหน้า ฝึกถึงไหนแล้ว จะจบคอร์สหรือยังนะ Streaks สถิติการฝึกอย่างติดต่อกัน ยิ่งฝึกติดต่อกันมากเท่าไหร่ ระบบก็จะแสดง Streaks ตามวันและเมื่อรักษาสถิติ Streaks ได้อย่างต่อเนื่องแล้ว โดยธรรมชาติของมนุษย์ แน่นอนว่าเราก็ไม่อยากจะทำลายสถิติของตัวเราเอง อยากฝึกทุกๆ วัน ไม่ว่าจะมากหรือน้อยก็ตาม</p>
+                     <p>4.  การเรียนรู้แบบ Interactive Learning
+                    
+                    การฝึกภาษาใน Duolingo ไม่ใช่แค่การถามและตอบ เพราะในแต่ละคอร์ส จะเป็นการเรียนครบทั้ง 4 ทักษะหลัก นั่นคือ อ่าน เขียน ฟัง และพูด ในรูปแบบ Interactive ช่วยให้ผู้เรียนสามารถเริ่มฝึกภาษาหนึ่งๆ ได้อย่างรอบด้านและยังตามอัตราความเร็ว (Pace) ที่อยากเรียนรู้ของผู้เรียนเอง</p>
+                    
+                <p>5. ใครว่าต้องเรียนแค่ภาษาจริง ๆ แฟน ๆ แม่มังกรอยากลองเรียน High Valyriaian  ก็ยังมี!
+                    
+                    นอกเหนือหลักสูตรกว่า 30 ภาษา อีกหนึ่งกิมมิคแสนสนุกที่พลาดไม่ได้เลยก็คือการลองเรียนภาษาชื่อดัง จากภาพยนตร์หรือซีรีส์ต่างๆ เช่น High Valyrian จากซีรีส์ Game of Thrones หรือ Klingon จาก Star Trek แม้จะไม่ใช่ภาษาจริงๆ แต่ปฏิเสธไม่ได้ว่าเมื่อได้ยินแม่มังกรพูดภาษาดังกล่าวในซีรีส์แล้ว หลายๆ คน ก็ต้องหลงใหลกับความสวยงามไปตามๆ กัน ซึ่งใครที่เป็นแฟนภาษาจากภาพยนตร์และซีรีส์ชื่อดังเหล่านี้ละก็ ต้องลองเลยทีเดียวค่ะ
+                    
+                    ประโยชน์ของ Duolingo สำหรับเด็กๆ
+                    
+                    นอกเหนือจากเรื่องของความสนุกสนานจากเหล่าฟีเจอร์ Gamification ต่างๆ จุดเด่นสำคัญของ Duolingo ก็คือเรื่องของหลักสูตรการเรียน เทคนิคการฝึกพัฒนาที่ออกแบบมาให้อยู่ในรูปของ Bite-Sized Learning หรือการเรียนรู้แบบพอดีคำ ไม่มาก ไม่น้อยเกินไป ช่วยให้เด็กๆ สามารถจดจ่อได้อย่างดี ไม่ต้องกังวล ลดความรู้สึกเหนื่อยในการเรียนรู้ แม้อาจจะมีการกระตุ้นให้เรียนอย่างรวดเร็วอยู่บ้างหรืออย่างต่อเนื่อง แต่ก็ยังอยู่ในปริมาณที่เรียนได้เรื่อยๆ ไม่รู้สึก Overwhelmed หรือ ท่วมท้นจนเกินไปนั่นเองครับ</p>
+                    <div class="center-container">
+                        <img src="https://memesthatpay.com/wp-content/uploads/2024/03/evil-duolingo-owl-1024x538.webp" alt="ภาพ1" width="600" height="auto">
+        </div>
+            <h3>Stepในการเรียนรู้</h3>
+        <div id="steps" class="steps">
+            <div class="step">
+                <h2>ขั้นตอนที่ 1: ตั้งเป้าหมาย</h2>
+                <p>กำหนดเป้าหมายการเรียน เช่น เพิ่มคำศัพท์ หรือฝึกสนทนา</p>
+            </div>
+            <div class="step">
+                <h2>ขั้นตอนที่ 2: ฝึกฝนทุกวัน</h2>
+                <p>ใช้ Duolingo ในกิจวัตรประจำวัน</p>
+            </div>
+            <div class="step">
+                <h2>ขั้นตอนที่ 3: ใช้สื่อหลากหลาย</h2>
+                <p>ดูวิดีโอ ฟังเพลง หรืออ่านบทความ</p>
+            </div>
+            <div class="step">
+                <h2>ขั้นตอนที่ 4: ติดตามผล</h2>
+                <p>ใช้ฟีเจอร์ติดตามใน Duolingo เพื่อวัดความคืบหน้า</p>
+            </div>
+        </div>
+
+        <div id="video" class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/bQIwTI6ulro" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div id="cta" class="cta">
+            <a href="https://th.duolingo.com/register" target="_blank">Start</a>
+        </div>
+
+        <div id="about" class="team">
+            <h2>About us</h2>
+            <p>Created by:</p>
+            <p>Raphiphat</p>
+            <p>Nattaphong</p>
+            <p>Facebook: <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width: 20px;"> <a href="https://www.facebook.com/rapxffy/" target="_blank">คลิกที่นี่</a></p>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials">
+    <footer>
+        <p>&copy; 2025 เรียนภาษาอังกฤษอย่างมีประสิทธิภาพ. สงวนลิขสิทธิ์</p>
+    </footer>
+    
+    <div class="chat-box">
+        <div class="chat-header">Chat for us</div>
+        <div class="chat-body"></div>
+        <div class="chat-input">
+            <input type="text" placeholder="พิมพ์ข้อความ...">
+            <button>ส่ง</button>
+        </div>
+    </div>
+
+    <script>
+        function closeSurvey() {
+            document.getElementById('survey').style.display = 'none';
+        }
+
+        document.querySelector('.chat-input button').addEventListener('click', () => {
+            const chatBody = document.querySelector('.chat-body');
+            const input = document.querySelector('.chat-input input');
+            if (input.value.trim()) {
+                const message = document.createElement('div');
+                message.textContent = input.value;
+                message.style.margin = '5px 0';
+                message.style.background = '#e8f5e9';
+                message.style.padding = '10px';
+                message.style.borderRadius = '10px';
+                message.style.alignSelf = 'flex-end';
+                message.style.maxWidth = '80%';
+                chatBody.appendChild(message);
+                input.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
